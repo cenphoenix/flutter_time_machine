@@ -99,11 +99,10 @@ class TimeMachineUtil {
     var monDay = getTimestampLatest(true, -weekday + 1 + weeks * 7); //周一
 
     mapTime['monDay'] = DateUtil.formatDate(
-        DateTime.fromMillisecondsSinceEpoch(sunDay ),
-        isUtc: true,
+        DateTime.fromMillisecondsSinceEpoch(sunDay),
         format: 'yyyy-MM-dd'); //周一 时间格式化
     mapTime['sunDay'] = DateUtil.formatDate(
-        DateTime.fromMillisecondsSinceEpoch(monDay ),
+        DateTime.fromMillisecondsSinceEpoch(monDay),
         format: 'yyyy-MM-dd'); //周一 时间格式化
     mapTime['monDayStamp'] = '$monDay'; //周一 时间戳
     mapTime['sunDayStamp'] = '$sunDay'; //周日 时间戳
@@ -117,8 +116,8 @@ class TimeMachineUtil {
     String newHours;
     DateTime now = new DateTime.now();
     DateTime sixtyDaysFromNow = now.add(new Duration(days: day));
-    String formattedDate = DateUtil.formatDate(sixtyDaysFromNow,
-        isUtc: true, format: 'yyyy-MM-dd');
+    String formattedDate =
+        DateUtil.formatDate(sixtyDaysFromNow, format: 'yyyy-MM-dd');
     if (phase) {
       newHours = formattedDate + ' 00:00:00';
     } else {
@@ -126,9 +125,9 @@ class TimeMachineUtil {
     }
 
     DateTime newDate = DateTime.parse(newHours);
-    String newFormattedDate = DateUtil.formatDate(newDate,
-        isUtc: true, format: 'yyyy-MM-dd HH:mm:ss');
-    int timeStamp = newDate.millisecondsSinceEpoch ;
+    String newFormattedDate =
+        DateUtil.formatDate(newDate, format: 'yyyy-MM-dd HH:mm:ss');
+    int timeStamp = newDate.millisecondsSinceEpoch;
     // print('时间' + newFormattedDate);
     return timeStamp;
   }
