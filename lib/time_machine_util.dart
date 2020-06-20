@@ -42,12 +42,13 @@ class TimeMachineUtil {
     var currentDate = new DateTime.now();
     if (iMonth + currentDate.month > 0) {
       //timeConversion(iMonth + currentDate.month, (currentDate.year).toString());
-      return  timeConversion(iMonth + currentDate.month, (currentDate.year);
+      return timeConversion(
+          iMonth + currentDate.month, (currentDate.year).toString());
     } else {
       int beforeYear = (iMonth + currentDate.month) ~/ 12;
       String yearNew = (currentDate.year + beforeYear - 1).toString();
       int monthNew = (iMonth + currentDate.month) - beforeYear * 12;
-      return  timeConversion(12 + monthNew, yearNew);
+      return timeConversion(12 + monthNew, yearNew);
     }
   }
 
@@ -117,7 +118,7 @@ class TimeMachineUtil {
     mapTime['sunDayStamp'] = '$sunDay'; //周日 时间戳
     print('某个周的周一和周日：$mapTime');
 
-    return [sunDay,monDay];
+    return [sunDay, monDay];
   }
 
   /**
