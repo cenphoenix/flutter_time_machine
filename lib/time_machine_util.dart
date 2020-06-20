@@ -10,7 +10,7 @@ class TimeMachineUtil {
   /**
    * 获取某一年的第一个月的第一天和最后一个月的最后一天
    */
-  static getStartEndYearDate(int iYear) {
+  static List getStartEndYearDate(int iYear) {
     Map mapDate = new Map();
     int yearNow = DateTime.now().year;
     yearNow = yearNow + iYear;
@@ -28,25 +28,30 @@ class TimeMachineUtil {
     mapDate['startStamp'] = turnTimestamp(mapDate['startTime'] + ' 00:00:00');
     mapDate['endStamp'] = turnTimestamp(mapDate['endTime'] + ' 23:59:59');
     print('某一年初和年末：$mapDate');
+    return [
+      turnTimestamp(mapDate['startTime'] + ' 00:00:00'),
+      turnTimestamp(mapDate['endTime'] + ' 23:59:59'),
+    ];
   }
 
   /**
    * 获得当前日期 未来/过去 第某个月第一天和最后一天时间
    */
-  static void getMonthDate(int iMonth) {
+  static List getMonthDate(int iMonth) {
     //获取当前日期
     var currentDate = new DateTime.now();
     if (iMonth + currentDate.month > 0) {
-      timeConversion(iMonth + currentDate.month, (currentDate.year).toString());
+      //timeConversion(iMonth + currentDate.month, (currentDate.year).toString());
+      return  timeConversion(iMonth + currentDate.month, (currentDate.year);
     } else {
       int beforeYear = (iMonth + currentDate.month) ~/ 12;
       String yearNew = (currentDate.year + beforeYear - 1).toString();
       int monthNew = (iMonth + currentDate.month) - beforeYear * 12;
-      timeConversion(12 + monthNew, yearNew);
+      return  timeConversion(12 + monthNew, yearNew);
     }
   }
 
-  static void timeConversion(int monthTime, String yearTime) {
+  static List timeConversion(int monthTime, String yearTime) {
     Map<String, String> dateMap = Map();
     dateMap['startDate'] = '$yearTime' +
         '-' +
@@ -78,6 +83,10 @@ class TimeMachineUtil {
     dateMap['endDateStamp'] =
         turnTimestamp(dateMap['endDate'] + ' 23:59:59').toString();
     print('过去未来某个月初月末：$dateMap');
+    return [
+      turnTimestamp(dateMap['startDate'] + ' 00:00:00'),
+      turnTimestamp(dateMap['endDate'] + ' 23:59:59')
+    ];
   }
 
   /**
@@ -90,7 +99,7 @@ class TimeMachineUtil {
   /**
    * 当前时间 过去/未来 某个周的周一和周日
    */
-  static void getWeeksDate(int weeks) {
+  static List getWeeksDate(int weeks) {
     Map<String, String> mapTime = new Map();
     DateTime now = new DateTime.now();
     int weekday = now.weekday; //今天周几
@@ -107,6 +116,8 @@ class TimeMachineUtil {
     mapTime['monDayStamp'] = '$monDay'; //周一 时间戳
     mapTime['sunDayStamp'] = '$sunDay'; //周日 时间戳
     print('某个周的周一和周日：$mapTime');
+
+    return [sunDay,monDay];
   }
 
   /**
