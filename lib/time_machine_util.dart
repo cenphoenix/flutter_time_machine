@@ -83,7 +83,6 @@ class TimeMachineUtil {
         turnTimestamp(dateMap['startDate'] + ' 00:00:00').toString();
     dateMap['endDateStamp'] =
         turnTimestamp(dateMap['endDate'] + ' 23:59:59').toString();
-    print('过去未来某个月初月末：$dateMap');
     return [
       turnTimestamp(dateMap['startDate'] + ' 00:00:00'),
       turnTimestamp(dateMap['endDate'] + ' 23:59:59')
@@ -118,7 +117,10 @@ class TimeMachineUtil {
     mapTime['sunDayStamp'] = '$sunDay'; //周日 时间戳
     print('某个周的周一和周日：$mapTime');
 
-    return [sunDay, monDay];
+    return [
+      getTimestampLatest(false, 7 - weekday + weeks * 7),
+      getTimestampLatest(true, -weekday + 1 + weeks * 7)
+    ];
   }
 
   /**
