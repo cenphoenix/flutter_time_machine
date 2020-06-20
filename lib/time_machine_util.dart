@@ -37,7 +37,7 @@ class TimeMachineUtil {
   /**
    * 获得当前日期 未来/过去 第某个月第一天和最后一天时间
    */
-  static List getMonthDate(int iMonth) {
+  static List<int> getMonthDate(int iMonth) {
     //获取当前日期
     var currentDate = new DateTime.now();
     if (iMonth + currentDate.month > 0) {
@@ -52,7 +52,7 @@ class TimeMachineUtil {
     }
   }
 
-  static List timeConversion(int monthTime, String yearTime) {
+  static List<int> timeConversion(int monthTime, String yearTime) {
     Map<String, String> dateMap = Map();
     dateMap['startDate'] = '$yearTime' +
         '-' +
@@ -99,13 +99,13 @@ class TimeMachineUtil {
   /**
    * 当前时间 过去/未来 某个周的周一和周日
    */
-  static List getWeeksDate(int weeks) {
+  static List<int> getWeeksDate(int weeks) {
     Map<String, String> mapTime = new Map();
     DateTime now = new DateTime.now();
     int weekday = now.weekday; //今天周几
 
-    var sunDay = getTimestampLatest(false, 7 - weekday + weeks * 7); //周末
-    var monDay = getTimestampLatest(true, -weekday + 1 + weeks * 7); //周一
+    int sunDay = getTimestampLatest(false, 7 - weekday + weeks * 7); //周末
+    int monDay = getTimestampLatest(true, -weekday + 1 + weeks * 7); //周一
 
     mapTime['monDay'] = DateUtil.formatDate(
         DateTime.fromMillisecondsSinceEpoch(sunDay),
@@ -115,12 +115,7 @@ class TimeMachineUtil {
         format: 'yyyy-MM-dd'); //周一 时间格式化
     mapTime['monDayStamp'] = '$monDay'; //周一 时间戳
     mapTime['sunDayStamp'] = '$sunDay'; //周日 时间戳
-    print('某个周的周一和周日：$mapTime');
-
-    return [
-      getTimestampLatest(false, 7 - weekday + weeks * 7),
-      getTimestampLatest(true, -weekday + 1 + weeks * 7)
-    ];
+    return [monDay, sunDay];
   }
 
   /**
