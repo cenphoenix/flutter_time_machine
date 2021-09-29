@@ -62,7 +62,7 @@ class TimeMachineUtil {
     //转时间戳再转时间格式 防止出错
     dateMap['startDate'] = DateUtil.formatDate(
         DateTime.fromMillisecondsSinceEpoch(
-            turnTimestamp(dateMap['startDate'])),
+            turnTimestamp(dateMap['startDate']!)),
         format: 'yyyy-MM-dd');
     //某个月结束时间，转时间戳再转
     String endMonth = '$yearTime' +
@@ -80,12 +80,12 @@ class TimeMachineUtil {
     dateMap['endDate'] = endMonth;
     //这里是为了公司后台接口 需加时间段的时间戳 但不显示在格式化实践中
     dateMap['startDateStamp'] =
-        turnTimestamp(dateMap['startDate'] + ' 00:00:00').toString();
+        turnTimestamp(dateMap['startDate']! + ' 00:00:00').toString();
     dateMap['endDateStamp'] =
-        turnTimestamp(dateMap['endDate'] + ' 23:59:59').toString();
+        turnTimestamp(dateMap['endDate']! + ' 23:59:59').toString();
     return [
-      turnTimestamp(dateMap['startDate'] + ' 00:00:00'),
-      turnTimestamp(dateMap['endDate'] + ' 23:59:59')
+      turnTimestamp(dateMap['startDate']! + ' 00:00:00'),
+      turnTimestamp(dateMap['endDate']! + ' 23:59:59')
     ];
   }
 
